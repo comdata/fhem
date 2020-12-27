@@ -32,12 +32,14 @@ RUN  apt-get update && \
           python3-pip \
           python3-setuptools \
           python3-wheel \
-		  build-essential libssl-dev libffi-dev python-dev \
-	&& \
-	pip3 install \
+		  build-essential libssl-dev libffi-dev python-dev  && \
+ 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.[^.] ~/.??* ~/*
+#	&& \
+RUN	pip3 install \
 			BroadlinkWifiThermostat cryptography simplejson paho-mqtt \
 	&&  \
-	chown fhem.dialout /opt/BroadLink && \
+	mkdir /opt/BroadLink && \	
+#	chown fhem.dialout /opt/BroadLink && \
 	cd /opt/BroadLink && \
 	git clone https://github.com/mjg59/python-broadlink.git && \
 	cd python-broadlink && \
