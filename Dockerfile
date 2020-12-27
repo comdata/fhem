@@ -24,8 +24,18 @@ RUN apt-get update &&  \
 RUN cpanm \
            Crypt::OpenSSL::AES
 
-RUN  pip3 install \
-			BroadlinkWifiThermostat cryptography
+RUN  apt-get update && \
+	 apt-get install -qqy --no-install-recommends \
+          libinline-python-perl \
+          python3 \
+          python3-dev \
+          python3-pip \
+          python3-setuptools \
+          python3-wheel \
+	&& \
+	pip3 install \
+			BroadlinkWifiThermostat cryptography \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.[^.] ~/.??* ~/*
 			
 RUN  npm install -g --unsafe-perm --production \
 			tradfri-fhem
