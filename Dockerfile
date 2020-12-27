@@ -35,8 +35,16 @@ RUN  apt-get update && \
 		  build-essential libssl-dev libffi-dev python-dev \
 	&& \
 	pip3 install \
-			BroadlinkWifiThermostat cryptography \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.[^.] ~/.??* ~/*
+			BroadlinkWifiThermostat cryptography simplejson paho-mqtt \
+	&&  \
+	chown fhem.dialout /opt/BroadLink && \
+	cd /opt/BroadLink && \
+	git clone https://github.com/mjg59/python-broadlink.git && \
+	cd python-broadlink && \
+	python setup.py install && \ 
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.[^.] ~/.??* ~/*
+	
+
 			
 RUN  npm install -g --unsafe-perm --production \
 			tradfri-fhem
