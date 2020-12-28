@@ -16,6 +16,7 @@
 ###
 
 FROM fhem/fhem
+LABEL org.opencontainers.image.source https://github.com/comdata/fhem
 
 RUN apt-get update &&  \
 	apt-get install -y nodejs libcrypt-cbc-perl libcrypt-rijndael-perl python3-pip python-pip && \
